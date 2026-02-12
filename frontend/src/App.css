@@ -1,0 +1,196 @@
+/* Global Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1a1a2e 100%);
+  background-attachment: fixed;
+  color: #e0e0e0;
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Light Mode */
+body.light-mode {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 50%, #f5f7fa 100%);
+  color: #333;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Sidebar Layout */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  width: 100%;
+}
+
+.main-container {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Light mode overrides for cards and containers */
+body.light-mode .video-card,
+body.light-mode .stats-card,
+body.light-mode .detections-card,
+body.light-mode .tips-card,
+body.light-mode .stat-card,
+body.light-mode .chart-card,
+body.light-mode .events-section {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .card-header {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .status-bar {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .page-header h1 {
+  -webkit-text-fill-color: #ff5252;
+}
+
+body.light-mode .page-header p,
+body.light-mode .stat-label,
+body.light-mode .stats-card h3,
+body.light-mode .detections-card h3,
+body.light-mode .tips-card h3,
+body.light-mode .chart-card h3 {
+  color: #666;
+}
+
+body.light-mode .stat-value,
+body.light-mode .stat-number {
+  color: #333;
+}
+
+body.light-mode .stat-item.fire .stat-value,
+body.light-mode .stat-card.fire .stat-number {
+  color: #ff5252;
+}
+
+body.light-mode .events-table th {
+  background: rgba(0, 0, 0, 0.05);
+  color: #666;
+}
+
+body.light-mode .events-table td {
+  color: #333;
+  border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .no-detections {
+  background: rgba(76, 175, 80, 0.15);
+  color: #2e7d32;
+}
+
+body.light-mode .toast {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .toast-title {
+  color: #333;
+}
+
+body.light-mode .toast-message {
+  color: #666;
+}
+
+body.light-mode .icon-btn {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .icon-btn:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .filter-btn {
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #666;
+}
+
+body.light-mode .filter-btn:hover {
+  color: #333;
+  border-color: rgba(0, 0, 0, 0.2);
+}
+
+body.light-mode .filter-btn.active {
+  background: rgba(33, 150, 243, 0.15);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 82, 82, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 82, 82, 0.7);
+}
+
+body.light-mode ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode ::-webkit-scrollbar-thumb {
+  background: rgba(255, 82, 82, 0.4);
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.05) 0%, 
+    rgba(255, 255, 255, 0.1) 50%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Button Reset */
+button {
+  font-family: inherit;
+}
+
+/* Selection */
+::selection {
+  background: rgba(255, 82, 82, 0.4);
+  color: #fff;
+}
