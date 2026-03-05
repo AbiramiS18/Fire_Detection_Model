@@ -21,10 +21,12 @@ This project is a real-time Fire and Smoke detection system that leverages Compu
 ### Backend
 - **Language:** Python
 - **Framework:** Flask (with Flask-SocketIO)
+- **Message Broker & State:** Redis
+- **Task Queue:** Celery
 - **ML Model:** YOLOv8 (Ultralytics)
 - **Computer Vision:** OpenCV
 - **Database:** SQLite
-- **Dependencies:** `flask`, `flask-cors`, `ultralytics`, `pillow`, `numpy`, `opencv-python-headless`
+- **Dependencies:** `flask`, `flask-cors`, `ultralytics`, `pillow`, `numpy`, `opencv-python-headless`, `celery`, `redis`, `flask-socketio`
 
 ### Frontend
 - **Framework:** React.js
@@ -35,9 +37,12 @@ This project is a real-time Fire and Smoke detection system that leverages Compu
 
 ```
 FireDetection/
+├── run.sh                  # One-click startup script for all services
 ├── backend/                # Python Flask Backend
-│   ├── app.py              # Main application entry point
-│   ├── database.py         # Database interactions
+│   ├── app.py              # Main application entry point (WebSocket API)
+│   ├── tasks.py            # Celery background tasks (YOLO inference)
+│   ├── state_manager.py    # Redis state management wrapper
+│   ├── database.py         # SQLite database interactions
 │   ├── best.pt             # Trained YOLO model weights
 │   ├── requirements.txt    # Python dependencies
 │   ├── static/             # Generated snapshots and uploads
@@ -52,37 +57,57 @@ FireDetection/
 ## Installation & Usage
 
 ### Prerequisites
-- Python 3.8+
+- Python 3.8+ (Anaconda recommended)
 - Node.js & npm
+- Redis (`brew install redis` on Mac or `sudo apt install redis` on Linux)
 
-### 1. Setup Backend
+### Quick Start (Recommended)
 
-Navigate to the `backend` directory and install the required Python packages.
-
+1. Ensure the Redis server is installed on your machine.
+2. Install Python backend dependencies:
 ```bash
 cd backend
 pip install -r requirements.txt
+cd ..
+```
+3. Install React frontend dependencies:
+```bash
+cd frontend
+npm install
+cd ..
+```
+4. Start all services instantly using the run script from the root directory:
+```bash
+chmod +x run.sh
+./run.sh
+```
+*This will automatically launch the Redis server, Celery worker pool, Flask backend (on port 5001), and React frontend (on port 3000) simultaneously.*
+
+### Manual Startup Step-by-Step
+
+If you prefer to run services individually in separate terminals:
+
+**1. Start Redis Server**
+```bash
+redis-server
 ```
 
-Start the Flask server.
-
+**2. Start Celery Background Worker**
 ```bash
+cd backend
+python -m celery -A tasks.celery worker -l info -c 1
+```
+
+**3. Start Flask Backend**
+```bash
+cd backend
 python app.py
 ```
 *The backend will run on `http://0.0.0.0:5001`.*
 
-### 2. Setup Frontend
-
-Open a new terminal, navigate to the `frontend` directory, and install the Node.js dependencies.
-
+**4. Start React Frontend**
 ```bash
 cd frontend
-npm install
-```
-
-Start the React development server.
-
-```bash
 npm start
 ```
 *The frontend will run on `http://localhost:3000`.*

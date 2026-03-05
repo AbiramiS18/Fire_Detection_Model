@@ -1,0 +1,30 @@
+YOLO model loaded successfully from best.pt
+ 
+ -------------- celery@ABIRAMIs-MacBook-Air-2.local v5.6.2 (recovery)
+--- ***** ----- 
+-- ******* ---- macOS-26.2-arm64-arm-64bit 2026-03-05 13:37:31
+- *** --- * --- 
+- ** ---------- [config]
+- ** ---------- .> app:         tasks:0x10fa490d0
+- ** ---------- .> transport:   redis://localhost:6379/0
+- ** ---------- .> results:     redis://localhost:6379/0
+- *** --- * --- .> concurrency: 1 (prefork)
+-- ******* ---- .> task events: OFF (enable -E to monitor tasks in this worker)
+--- ***** ----- 
+ -------------- [queues]
+                .> celery           exchange=celery(direct) key=celery
+                
+
+[tasks]
+  . process_video_frame
+
+[2026-03-05 13:37:31,912: INFO/MainProcess] Connected to redis://localhost:6379/0
+[2026-03-05 13:37:31,917: INFO/MainProcess] mingle: searching for neighbors
+[2026-03-05 13:37:32,923: INFO/MainProcess] mingle: all alone
+[2026-03-05 13:37:32,931: INFO/MainProcess] celery@ABIRAMIs-MacBook-Air-2.local ready.
+
+worker: Hitting Ctrl+C again will initiate cold shutdown, terminating all running tasks!
+
+worker: Warm shutdown (MainProcess)
+
+worker: Warm shutdown (MainProcess)

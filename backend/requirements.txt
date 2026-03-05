@@ -4,3 +4,6 @@ ultralytics
 pillow
 numpy
 opencv-python-headless
+celery
+redis
+flask-socketio
